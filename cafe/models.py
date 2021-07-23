@@ -40,7 +40,7 @@ class Photos(models.Model):
     """Фото кафе"""
     title = models.CharField("Заголовок", max_length=100)
     description = models.TextField("Описание")
-    image = models.ImageField("Фото интерьера", "cafe_shots/")
+    image = models.ImageField("Фото интерьера", upload_to="cafe_shots/", null=True)
     cafe = models.ForeignKey(Cafe, verbose_name="Кафе", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -67,7 +67,7 @@ class Rating(models.Model):
     """Рейтинг"""
     ip = models.CharField("IP адрес", max_length=15)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name="Звезда")
-    cafe = models.ForeignKey(Cafe, on_delete=models.CharField, verbose_name="Кафе")
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE, verbose_name="Кафе")
 
     def __str__(self):
         return f"{self.star} - {self.cafe}"

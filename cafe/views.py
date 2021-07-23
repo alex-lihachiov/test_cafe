@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.views import View
 
-# Create your views here.
+from .models import Cafe
+
+
+class CafeView(View):
+    """Список кафешек"""
+    def get(self,request):
+        cafe = Cafe.objects.all()
+        return render(request, "cafe/cafe.html", {"cafe_list": cafe})
